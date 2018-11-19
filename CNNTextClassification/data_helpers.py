@@ -1,7 +1,6 @@
 import numpy as np
 import re
 
-
 def clean_str(string):
     """
     Tokenization/string cleaning for all datasets except for SST.
@@ -20,6 +19,8 @@ def clean_str(string):
     string = re.sub(r"\)", " \) ", string)
     string = re.sub(r"\?", " \? ", string)
     string = re.sub(r"\s{2,}", " ", string)
+    string = re.sub(r'\S*(x{2,}|X{2,})\S*',"xxx", s)
+	string = re.sub(r'[^\x00-\x7F]+', "", s)
     return string.strip().lower()
 
 
@@ -39,7 +40,10 @@ def load_data_and_labels(positive_data_file, negative_data_file):
     # Generate labels
     positive_labels = [[0, 1] for _ in positive_examples]
     negative_labels = [[1, 0] for _ in negative_examples]
+    print("positive_labels: ", positive_labels)
+    print("negative_labels: ", negative_labels)
     y = np.concatenate([positive_labels, negative_labels], 0)
+    print("y : ", y)
     return [x_text, y]
 
 
