@@ -4,13 +4,15 @@ var http = require('http');
 
 var app = express();
 
+app.set('port', process.env.PORT || 3001);
+
 
 
 var bodyParser = require('body-parser');
 
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 
@@ -22,43 +24,9 @@ app.post('/login',function(req,res){
 
   var password=req.body.password;
 
-
-
   console.log("User name = "+user_name+", password is "+password);
 
   res.end("yes");
-
-
-
-  var PythonShell = require('python-shell');
-
-  var options = {
-
-    mode: 'text',
-
-    pythonPath: '',
-
-    pythonOptions: ['-u'],
-
-    scriptPath: '',
-
-    args: ['dain', 'ain']
-
-  };
-
-  
-
-  PythonShell.run('hello.py', options, function (err, results) {
-
-    if (err) throw err;
-
-    
-
-    res.send(results.toString());
-
-  });
-
-  
 
 });
 
@@ -66,15 +34,30 @@ app.post('/login',function(req,res){
 
 
 
+app.get('/name', function(req, res) {
+
+    var spawn = require("child_process").spawn;
+
+    var process = spawn('python',["./hello.py",
+
+                            req.query.firstname,
+
+                            req.query.lastname] );
 
 
 
+    process.stdout.on('data', function(data) {
 
-app.set( 'port', process.env.PORT || 3001 );
+      res.send(data.toString());
 
-http.createServer( app ).listen( app.get( 'port' ), function (){
+    })
 
-  console.log( 'Express server listening on port ' + app.get( 'port' ));
+});
+
+
+http.createServer(app).listen(app.get('port'), function(){
+
+	console.log('start server on port' + app.get('port'));
 
 });
 
