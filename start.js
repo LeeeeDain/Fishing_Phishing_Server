@@ -1,37 +1,79 @@
 var express = require('express');
-var app = express();
+
 var http = require('http');
-var server = http.createServer(app);
 
-var bodyParser = require("body-parser");
+var app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+
+
+var bodyParser = require('body-parser');
+
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
+
+
 app.post('/login',function(req,res){
+
   var user_name=req.body.user;
+
   var password=req.body.password;
+
+
+
   console.log("User name = "+user_name+", password is "+password);
+
   res.end("yes");
+
+
+
+  var PythonShell = require('python-shell');
+
+  var options = {
+
+    mode: 'text',
+
+    pythonPath: '',
+
+    pythonOptions: ['-u'],
+
+    scriptPath: '',
+
+    args: ['dain', 'ain']
+
+  };
+
+  
+
+  PythonShell.run('hello.py', options, function (err, results) {
+
+    if (err) throw err;
+
+    console.log('results: %j', results);
+
+  });
+
+  
+
 });
 
 
-app.get('/name', callName);
-function callName(req, res) {
-    var spawn = require("child_process").spawn;
-    // E.g.: http://localhost:3000/name?firstname=Mike&lastname=Will
-	var process = spawn('python',["./hello.py",
-                            req.query.firstname,
-                            req.query.lastname] );
 
-    process.stdout.on('data', function(data) {
-        res.send(data.toString());
-    } )
-}
 
-var port = process.env.PORT || 3000;
-server.listen(port,'fishing-phishing.herokuapp.com');
-server.on('listening',function(){
-        console.log('server start ! on port 3000');
+
+
+
+
+
+app.set( 'port', process.env.PORT || 3001 );
+
+http.createServer( app ).listen( app.get( 'port' ), function (){
+
+  console.log( 'Express server listening on port ' + app.get( 'port' ));
+
 });
+
 
