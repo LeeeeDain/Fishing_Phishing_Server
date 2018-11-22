@@ -30,7 +30,7 @@ function callName(req, res) {
 }
 
 var port = process.env.PORT || 3000;
-server.listen(port,'localhost');
+server.listen(port,'fishing-phishing.herokuapp.com');
 server.on('listening',function(){
         console.log('server start ! on port 3000');
 });
