@@ -34,9 +34,13 @@ app.post('/text', function(req,res){
 
   var spawn = require("child_process").spawn;
 
-  var process = spawn('python',["./Deep_Learning/CNNTextClassification/eval.py",
+  var process = spawn('python',["./Deep_Learning/CNNTextClassification/hello.py", voice_text,"dain"] );
 
-                              voice_text] );
+  process.stdout.on('data', function(data) {
+
+      res.send(data.toString());
+
+    })
 
   res.send("test");
 
