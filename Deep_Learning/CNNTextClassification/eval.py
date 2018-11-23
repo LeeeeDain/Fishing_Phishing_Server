@@ -10,11 +10,11 @@ from text_cnn import TextCNN
 from tensorflow.contrib import learn
 import json
 #
-# from firebase import firebase
+from firebase import firebase
 #
-# firebase = firebase.FirebaseApplication('https://fishingphishing-2ac98.firebaseio.com/')
+firebase = firebase.FirebaseApplication('https://fishingphishing-2ac98.firebaseio.com/')
 #
-# resultPut = firebase.put('user','name',{'name1':'dain','name2':'ain'})
+
 
 # Parameters
 # ==================================================
@@ -113,8 +113,7 @@ predictions_human_readable_tolist = predictions_human_readable.tolist()
 
 #firebase 데이터 넘길때 사용
 for x in predictions_human_readable:
-    print(x[0])
-    print(x[1])
+    resultPut = firebase.put('user','name',{'name1':x[0],'name2':x[1]})
 
 
 data = {}
