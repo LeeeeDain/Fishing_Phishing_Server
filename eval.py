@@ -23,19 +23,19 @@ print(os.getcwd())
 # Data Parameters
 #tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
 #tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the negative data.")
-tf.flags.DEFINE_string("scam_data_file", "./data/phone_scam_data.txt", "Data source for the phone_scam data.")
+tf.flags.DEFINE_string("scam_data_file", "./Deep_Learning/CNNTextClassification/data/phone_scam_data.txt", "Data source for the phone_scam data.")
 
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_string("checkpoint_dir", "./runs/1542974157/checkpoints", "Checkpoint directory from training run")
+tf.flags.DEFINE_string("checkpoint_dir", "./Deep_Learning/CNNTextClassification/runs/1542974157/checkpoints", "Checkpoint directory from training run")
 tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
 # Misc Parameters
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
 
-input_data = sys.argv[1]
+input_data = "dainy is cute."
 
 FLAGS = tf.flags.FLAGS
 
