@@ -43,7 +43,8 @@ app.post('/text', function(req,res){
     res.send(data.toString());
 
   })
-
+   
+  res.send("ok");
 }); 
 
 
