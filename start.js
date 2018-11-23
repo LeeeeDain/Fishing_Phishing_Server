@@ -37,8 +37,8 @@ app.post('/', function(req,res){
 
   res.send("test1");
 
-  var process = spawn('python',["./Deep_Learning/CNNTextClassification/eval.py",
-                            voice_text] );
+  var process = spawn('python',["./hello.py",
+                            voice_text,initialize ] );
 
   res.send("test2");
 
