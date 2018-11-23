@@ -44,6 +44,7 @@ app.post('/text', function(req,res){
 
   })
    
+
   res.send("ok");
 }); 
 
