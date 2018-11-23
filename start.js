@@ -31,23 +31,17 @@ app.post('/', function(req,res){
   voice_text += req.body.text;
 
 
-  res.send("test0");
-
   var spawn = require("child_process").spawn;
-
-  res.send("test1");
 
   var process = spawn('python',["./hello.py",
                             voice_text,initialize ] );
 
-  res.send("test2");
 
   process.stdout.on('data', function(data) {
       res.send(data.toString() + "\n");
     })
   res.send("test3");
 
-  res.end("python end!");
   res.send("test4");
 });
 
