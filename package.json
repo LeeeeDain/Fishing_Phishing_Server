@@ -1,0 +1,16 @@
+{
+	"name": "fishing-phishing-server",
+	"version": "1.0.0",
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"ejs": "~2.4.1",
+		"express": "~4.13.1"
+	},
+	"engines":{
+		"node":"10.13.0",
+		"npm":"6.4.1"
+	},
+	"scripts":{
+		"start":"node start.js"
+	}
+}
