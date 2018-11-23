@@ -6,11 +6,11 @@
 		"ejs": "~2.4.1",
 		"express": "~4.13.1"
 	},
-	"engines":{
-		"node":"10.13.0",
-		"npm":"6.4.1"
+	"engines": {
+		"node": "10.13.0",
+		"npm": "6.4.1"
 	},
-	"scripts":{
-		"start":"node start.js"
+	"scripts": {
+		"start": "node start.js"
 	}
 }
