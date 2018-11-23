@@ -36,7 +36,7 @@ app.post('/text', function(req,res){
 
   var process = spawn('python',["./Deep_Learning/CNNTextClassification/eval.py",
 
-                              voice_text,"dain"] );
+                              voice_text] );
 
   process.stdout.on('data', function(data) {
 
