@@ -1,2 +1,0 @@
-# Fishing_Phishing_Server
-2019_ImagineCup_Server
