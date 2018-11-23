@@ -9,12 +9,13 @@ import data_helpers
 from text_cnn import TextCNN
 from tensorflow.contrib import learn
 import json
+import sys
 #
 from firebase import firebase
 #
 firebase = firebase.FirebaseApplication('https://fishingphishing-2ac98.firebaseio.com/')
 #
-
+print(os.getcwd())
 
 # Parameters
 # ==================================================
@@ -27,7 +28,7 @@ tf.flags.DEFINE_string("scam_data_file", "./data/phone_scam_data.txt", "Data sou
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_string("checkpoint_dir", "../runs/1542826306/checkpoints", "Checkpoint directory from training run")
+tf.flags.DEFINE_string("checkpoint_dir", "./runs/1542974157/checkpoints", "Checkpoint directory from training run")
 tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
 # Misc Parameters
@@ -50,7 +51,7 @@ if FLAGS.eval_train:
     x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.scam_data_file)
     y_test = np.argmax(y_test, axis=1)
 else:
-    x_raw = input_data.tolist()
+    x_raw = [input_data]
     y_test = [0]
 
 # Map data into vocabulary
