@@ -11,6 +11,6 @@
 		"npm":"6.4.1"
 	},
 	"scripts":{
-		"start":"node ./Server/start.js"
+		"start":"node start.js"
 	}
 }
