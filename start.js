@@ -34,17 +34,17 @@ app.post('/text', function(req,res){
 
   var spawn = require("child_process").spawn;
 
-  var process = spawn('python',["./Deep_Learning/CNNTextClassification/hello.py", voice_text,"dain"] );
+  var process = spawn('python',["./Deep_Learning/CNNTextClassification/hello.py",
+
+                              voice_text,"dain"] );
 
   process.stdout.on('data', function(data) {
 
-      res.send(data.toString());
+    res.send(data.toString());
 
-    })
+  })
 
-  res.send("test");
-
-});
+}); 
 
 
 
