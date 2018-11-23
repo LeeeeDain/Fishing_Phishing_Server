@@ -31,8 +31,6 @@ app.post('/', function(req,res){
   voice_text += req.body.text;
 
 
-  res.send("voice text : " + voice_text.toString() + "\n");
-
   res.send("test0");
 
   var spawn = require("child_process").spawn;
