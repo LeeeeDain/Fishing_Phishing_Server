@@ -34,7 +34,7 @@ tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
 
-#input_data = sys.argv[0]
+input_data = sys.argv[1]
 
 FLAGS = tf.flags.FLAGS
 
@@ -50,7 +50,7 @@ if FLAGS.eval_train:
     x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.scam_data_file)
     y_test = np.argmax(y_test, axis=1)
 else:
-    x_raw = ["asjdkasjdkasjkdasjkdjaskd"]
+    x_raw = input_data.tolist()
     y_test = [0]
 
 # Map data into vocabulary
