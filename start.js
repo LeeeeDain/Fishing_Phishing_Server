@@ -10,53 +10,38 @@ app.set('port', process.env.PORT || 3001);
 
 var bodyParser = require('body-parser');
 
-
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 
 
 
-app.post('/login',function(req,res){
-
-  var user_name=req.body.user;
-
-  var password=req.body.password;
-
-  console.log("User name = "+user_name+", password is "+password);
-
-  res.end("yes");
-
-});
+var voice_text = '';
 
 
 
+app.post('/', function(req,res){
 
+  var initialize = req.body.initialize;
 
-app.get('/name', function(req, res) {
+  if(initialize == 1)
 
-    var spawn = require("child_process").spawn;
+    voice_text = '';
 
-    var process = spawn('python',["./hello.py",
-
-                            req.query.firstname,
-
-                            req.query.lastname] );
+  voice_text += req.body.text;
 
 
 
-    process.stdout.on('data', function(data) {
+  var spawn = require("child_process").spawn;
 
-      res.send(data.toString());
-
-    })
+  var process = spawn('python',["./Deep_Learning/CNNTextClassification/eval.py",
+                            voice_text] );
 
 });
+
 
 
 http.createServer(app).listen(app.get('port'), function(){
-
 	console.log('start server on port' + app.get('port'));
 
 });
