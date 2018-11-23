@@ -13,5 +13,5 @@ def hello_world():
     return text
 
 
-#if __name__ == '__main__':
-#    app.run('http://fishing-phishing-flask.herokuapp.com/', 3000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0',debug=True)

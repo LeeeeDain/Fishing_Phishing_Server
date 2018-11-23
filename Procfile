@@ -1,1 +1,1 @@
-web:python Hello.py
+web: funicorn app:app
