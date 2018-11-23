@@ -31,7 +31,6 @@ app.post('/', function(req,res){
   voice_text += req.body.text;
 
 
-
   var spawn = require("child_process").spawn;
 
   var process = spawn('python',["./Deep_Learning/CNNTextClassification/eval.py",
