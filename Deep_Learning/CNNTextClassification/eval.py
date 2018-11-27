@@ -38,7 +38,7 @@ tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on 
 
 
 input_data = sys.argv[1]
-
+current_call_list_num = sys.argv[2]
 
 FLAGS = tf.flags.FLAGS
 
@@ -123,7 +123,7 @@ predictions_human_readable_tolist = predictions_human_readable.tolist()
 
 #firebase
 for x in predictions_human_readable:
-    resultPut = firebase.put('user','name',{'name1':x[0],'name2':x[1]})
+    firebase.put('/call/call_list/call'+str(current_call_list_num),'accuracy',x[1])
 
 
 data = {}
