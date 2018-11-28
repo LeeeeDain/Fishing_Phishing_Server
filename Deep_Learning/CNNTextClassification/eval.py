@@ -1,20 +1,22 @@
-#! /usr/bin/env python
+#!/home/leedain/anaconda3/bin/python
+# -*- coding: utf-8 -*-
 
 import tensorflow as tf
 import numpy as np
-import os
+import os,sys
 import time
 import datetime
 import data_helpers
 from text_cnn import TextCNN
 from tensorflow.contrib import learn
 import json
+
+
 #
-# from firebase import firebase
+from firebase import firebase
 #
-# firebase = firebase.FirebaseApplication('https://fishingphishing-2ac98.firebaseio.com/')
+firebase = firebase.FirebaseApplication('https://fishingphishing-2ac98.firebaseio.com/')
 #
-# resultPut = firebase.put('user','name',{'name1':'dain','name2':'ain'})
 
 # Parameters
 # ==================================================
@@ -22,21 +24,24 @@ import json
 # Data Parameters
 #tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
 #tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the negative data.")
-tf.flags.DEFINE_string("scam_data_file", "./data/phone_scam_data.txt", "Data source for the phone_scam data.")
+tf.flags.DEFINE_string("scam_data_file", "/home/leedain/Desktop/Fishing_Phishing_Server/Deep_Learning/CNNTextClassification/data/phone_scam_data.txt", "Data source for the phone_scam data.")
 
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_string("checkpoint_dir", "../runs/1542826306/checkpoints", "Checkpoint directory from training run")
+tf.flags.DEFINE_string("checkpoint_dir", "/home/leedain/Desktop/Fishing_Phishing_Server/Deep_Learning/CNNTextClassification/runs/1543004619/checkpoints/", "Checkpoint directory from training run")
 tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
 # Misc Parameters
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
 
-#input_data = sys.argv[0]
+
+input_data = sys.argv[1]
+current_call_list_num = sys.argv[2]
 
 FLAGS = tf.flags.FLAGS
+
 
 #FLAGS._parse_flags()
 
@@ -50,12 +55,15 @@ if FLAGS.eval_train:
     x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.scam_data_file)
     y_test = np.argmax(y_test, axis=1)
 else:
-    x_raw = ["asjdkasjdkasjkdasjkdjaskd"]
+    x_raw = [input_data]
     y_test = [0]
 
 # Map data into vocabulary
-vocab_path = os.path.join(FLAGS.checkpoint_dir, "..", "vocab")
+#vocab_path = os.path.join(FLAGS.checkpoint_dir, "..", "vocab")
+vocab_path = '/home/leedain/Desktop/Fishing_Phishing_Server/Deep_Learning/CNNTextClassification/runs/1543004619/vocab'
+
 vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
+
 x_test = np.array(list(vocab_processor.transform(x_raw)))
 
 print("\nEvaluating...\n")
@@ -111,10 +119,11 @@ predictions_human_readable = np.column_stack((np.array(x_raw), all_predictions))
 
 predictions_human_readable_tolist = predictions_human_readable.tolist()
 
-#firebase 데이터 넘길때 사용
+
+
+#firebase
 for x in predictions_human_readable:
-    print(x[0])
-    print(x[1])
+    firebase.put('/call/call_list/call'+str(current_call_list_num),'accuracy',x[1])
 
 
 data = {}
