@@ -123,8 +123,7 @@ predictions_human_readable_tolist = predictions_human_readable.tolist()
 
 #firebase
 for x in predictions_human_readable:
-    firebase.put('/call/call_list/call'+str(current_call_list_num),'accuracy',x[1])
-
+    firebase.put('/call/call_list/'+str(current_call_list_num),'accuracy',x[1])
 
 data = {}
 list = []
